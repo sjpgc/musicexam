@@ -7,8 +7,8 @@
     <ProjectGuid>{9F77B5EC-0E4F-4356-8650-38963C669F63}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ducita.Domain</RootNamespace>
-    <AssemblyName>Ducita.Domain</AssemblyName>
+    <RootNamespace>Ductia.Domain</RootNamespace>
+    <AssemblyName>Ductia.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

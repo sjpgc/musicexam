@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ducita.Domain
+namespace Ductia.Domain
 {
 	public interface IEntity
 	{

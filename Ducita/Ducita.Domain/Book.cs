@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ducita.Domain
+namespace Ductia.Domain
 {
 	public class Book : EntityBase
 	{

@@ -1,4 +1,4 @@
-﻿namespace Ducita.Domain
+﻿namespace Ductia.Domain
 {
 	public class Piece : EntityBase
 	{
