@@ -7,16 +7,41 @@
 <body>
 	<input type="text" id="iptPieceName" />
 	<input type="button" id="btnSearch" value="Search" />
+<table id="bookTable">
+	<tr>
+		<th>Title</th>
+		<th>ISBN</th>
+		<th>Publisher</th>
+	</tr>
+</table>
 
-	<script>
-		$(function() {
+
+<script>
+	$(function () {
+		var tableElement = $("#bookTable");
+
 			$("#btnSearch").click(function () {
-				$.get("search/books/something", function() {
-					alert("got it!");
+				$.get("search/books/" + $("#iptPieceName").val(), function (data) {
+
+					tableElement.find("tr").slice(1).remove();
+
+					$.each(data, function (index, value) {
+						
+						var newRow = "<tr>";
+						
+						newRow += "<td>" + value.title + "</td>";
+						newRow += "<td>" + value.isbn + "</td>";
+						newRow += "<td>" + value.publisher + "</td>";
+
+						newRow += "</tr>";
+						tableElement.append(newRow);
+					});
 				});
 			});
 		});
 	</script>
+
+
 
 </body>
 </html>

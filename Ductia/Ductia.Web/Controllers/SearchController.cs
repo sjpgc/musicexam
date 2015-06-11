@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +11,13 @@ namespace Ductia.Web.Controllers
 {
     public class SearchController : ApiController
     {
+	    private readonly IBookRepository _bookRepository;
+		
+	    public SearchController()
+	    {
+		    _bookRepository = new BookRepository();
+	    }
+
         // GET api/search
         public IEnumerable<string> Get()
         {
@@ -26,11 +34,7 @@ namespace Ductia.Web.Controllers
 		[Route("search/books/{pieceName}")]
 	    public IEnumerable<Book> SearchBooks(string pieceName)
 		{
-			return new List<Book>
-			{
-				new Book {Id = Guid.NewGuid(), Title ="Some title", Publisher = "Acme ltd.", Isbn = "47859375"},
-				new Book {Id = Guid.NewGuid(), Title = "Some other title", Publisher = "Pub ltd", Isbn = "485347895"},
-			};
+			return _bookRepository.SearchInPieces(pieceName);
 		} 
 
 
