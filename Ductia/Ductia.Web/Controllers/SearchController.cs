@@ -13,9 +13,9 @@ namespace Ductia.Web.Controllers
     {
 	    private readonly IBookRepository _bookRepository;
 		
-	    public SearchController()
+	    public SearchController(IBookRepository repository)
 	    {
-		    _bookRepository = new BookRepository();
+		    _bookRepository = repository;
 	    }
 
         // GET api/search
