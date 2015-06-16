@@ -1,17 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ductia.Domain;
 
-namespace Ductia.Web.Controllers
+namespace Ductia.Persistence.InMemory
 {
-	public class BookRepository : IBookRepository
+	internal static class InMemoryStorage
 	{
-		public List<Book> bookData
+
+		private static List<Book> _books;  
+
+		static InMemoryStorage()
 		{
-			get
-			{
-				return new List<Book>
+			_books = new List<Book>
 			    {
 				    new Book {Id = Guid.NewGuid(), Title = "Some title", Publisher = "Acme ltd.", Isbn = "47859375", Pieces = new List<Piece>
 				    {
@@ -27,13 +27,11 @@ namespace Ductia.Web.Controllers
 						new Piece {Title = "Water Music"},
 				    }},
 			    };
-			}
 		}
 
-		public IEnumerable<Book> SearchInPieces(string pieceName)
+		public static IEnumerable<Book> Books
 		{
-			var books = bookData.Where(b => b.Pieces.Any(p => p.Title.ToLower().Contains(pieceName.ToLower())));
-			return books;
+			get { return _books; }
 		}
 	}
 }

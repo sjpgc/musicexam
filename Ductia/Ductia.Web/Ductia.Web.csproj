@@ -200,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Controllers\BookRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -222,7 +221,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IBookRepository.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -315,6 +313,14 @@
     <ProjectReference Include="..\Ductia.Domain\Ductia.Domain.csproj">
       <Project>{9F77B5EC-0E4F-4356-8650-38963C669F63}</Project>
       <Name>Ductia.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ductia.Persistence.InMemory\Ductia.Persistence.InMemory.csproj">
+      <Project>{6BA28055-2794-4200-8809-DA611EDEF38D}</Project>
+      <Name>Ductia.Persistence.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ductia.Persistence\Ductia.Persistence.csproj">
+      <Project>{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}</Project>
+      <Name>Ductia.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

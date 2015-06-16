@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Ductia.Domain;
+using Ductia.Persistence;
+using Microsoft.Practices.Unity;
 
 namespace Ductia.Web.Controllers
 {
@@ -18,18 +20,6 @@ namespace Ductia.Web.Controllers
 		    _bookRepository = repository;
 	    }
 
-        // GET api/search
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/search/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
 		[HttpGet]
 		[Route("search/books/{pieceName}")]
 	    public IEnumerable<Book> SearchBooks(string pieceName)
@@ -37,20 +27,5 @@ namespace Ductia.Web.Controllers
 			return _bookRepository.SearchInPieces(pieceName);
 		} 
 
-
-        // POST api/search
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/search/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/search/5
-        public void Delete(int id)
-        {
-        }
     }
 }

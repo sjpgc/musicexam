@@ -1,5 +1,7 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
+using Ductia.Persistence;
+using Ductia.Persistence.InMemory;
 using Ductia.Web.Controllers;
 using Unity.WebApi;
 

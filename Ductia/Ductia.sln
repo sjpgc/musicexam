@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Domain", "Ductia.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Web", "Ductia.Web\Ductia.Web.csproj", "{87050123-D882-4490-B7A7-9AE11CBC83FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Persistence", "Ductia.Persistence\Ductia.Persistence.csproj", "{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Persistence.InMemory", "Ductia.Persistence.InMemory\Ductia.Persistence.InMemory.csproj", "{6BA28055-2794-4200-8809-DA611EDEF38D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{584B9151-A4AC-4A70-9400-B9D4CFF6E4C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Web.Tests", "Ductia.Web.Tests\Ductia.Web.Tests.csproj", "{2E2E7E40-111C-487B-9924-C7D33A9C998E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +29,23 @@ Global
 		{87050123-D882-4490-B7A7-9AE11CBC83FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87050123-D882-4490-B7A7-9AE11CBC83FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87050123-D882-4490-B7A7-9AE11CBC83FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA28055-2794-4200-8809-DA611EDEF38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA28055-2794-4200-8809-DA611EDEF38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA28055-2794-4200-8809-DA611EDEF38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA28055-2794-4200-8809-DA611EDEF38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2E7E40-111C-487B-9924-C7D33A9C998E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2E7E40-111C-487B-9924-C7D33A9C998E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2E7E40-111C-487B-9924-C7D33A9C998E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2E7E40-111C-487B-9924-C7D33A9C998E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2E2E7E40-111C-487B-9924-C7D33A9C998E} = {584B9151-A4AC-4A70-9400-B9D4CFF6E4C3}
 	EndGlobalSection
 EndGlobal
