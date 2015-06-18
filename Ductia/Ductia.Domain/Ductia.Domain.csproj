@@ -44,8 +44,12 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="Grade.cs" />
+    <Compile Include="GradePiece.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="Instrument.cs" />
     <Compile Include="Piece.cs" />
+    <Compile Include="PieceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

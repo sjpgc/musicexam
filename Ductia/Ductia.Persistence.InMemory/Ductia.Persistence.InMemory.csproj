@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BookRepository.cs" />
     <Compile Include="InMemoryStorage.cs" />
+    <Compile Include="PieceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

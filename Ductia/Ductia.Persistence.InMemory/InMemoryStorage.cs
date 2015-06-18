@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Ductia.Domain;
 
 namespace Ductia.Persistence.InMemory
@@ -7,7 +8,8 @@ namespace Ductia.Persistence.InMemory
 	internal static class InMemoryStorage
 	{
 
-		private static List<Book> _books;  
+		private static List<Book> _books;
+		private static List<GradePiece> _gradePieces; 
 
 		static InMemoryStorage()
 		{
@@ -27,11 +29,18 @@ namespace Ductia.Persistence.InMemory
 						new Piece {Title = "Water Music"},
 				    }},
 			    };
+
 		}
+
 
 		public static IEnumerable<Book> Books
 		{
 			get { return _books; }
+		}
+
+		public static IEnumerable<GradePiece> GradePieces
+		{
+			get { return _gradePieces; }
 		}
 	}
 }

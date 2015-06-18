@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Ductia.Web;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Ductia.Web.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace Ductia.Web
 {
