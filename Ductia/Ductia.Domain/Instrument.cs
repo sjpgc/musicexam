@@ -2,9 +2,9 @@
 {
 	public enum Instrument
 	{
-		Flute, 
-		DescantRecorder,
-		AltoRecorder,
-		Guitar
+		Flute = 1,
+		DescantRecorder = 2,
+		AltoRecorder = 3,
+		Guitar = 4
 	}
 }

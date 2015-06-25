@@ -15,8 +15,9 @@ namespace Ductia.Web
             
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            
-            container.RegisterType<IBookRepository, BookRepository>();
+
+			container.RegisterType<IBookRepository, BookRepository>();
+			container.RegisterType<IPieceRepository,PieceRepository>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

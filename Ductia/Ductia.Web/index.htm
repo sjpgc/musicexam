@@ -5,41 +5,133 @@
 	<script src="Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
-	<input type="text" id="iptPieceName" />
+<div id="searchByPieceNameDiv">
+	<input type="text" id="iptPieceName"/>
 	<input type="button" id="btnSearch" value="Search" />
-<table id="bookTable">
-	<tr>
-		<th>Title</th>
-		<th>ISBN</th>
-		<th>Publisher</th>
-	</tr>
-</table>
+	<table id="bookTable">
+		<tr>
+			<th>Title</th>
+			<th>ISBN</th>
+			<th>Publisher</th>
+		</tr>
+	</table>
+
+</div>
+
+
+
+<div id="searchByGradeDiv">
+	<select id="slectedInstrument">
+		<option value="">
+			Choose an Instrument
+		</option>
+		<option value="Flute">
+			Flute
+		</option>
+		<option value="DescantRecorder">
+			Descant Recorder
+		</option>
+		<option value="AltoRecorder">
+			Alto Recorder
+		</option>
+		<option value="Guitar">
+			Guitar
+		</option>
+	</select>
+	<select id="selectedGrade">
+		<option value="-1">
+			Choose a Grade
+		</option>
+		<option value="1">
+			Grade 1
+		</option>
+		<option value="2">
+			Grade 2
+		</option>
+		<option value="3">
+			Grade 3
+		</option>
+		<option value="4">
+			Grade 4
+		</option>
+		<option value="5">
+			Grade 5
+		</option>
+		<option value="6">
+			Grade 6
+		</option>
+		<option value="7">
+			Grade 7
+		</option>
+		<option value="8">
+			Grade 8
+		</option>
+	</select>
+	<input type="button" id="btnGradeSearch" value="Search" />
+	<table id="gradeTable">
+		<tr>
+			<th>List</th>
+			<th>Title</th>
+			<th>Grade</th>
+		</tr>
+	</table>
+</div>
+
+
+
+
+
+
 
 
 <script>
-	$(function () {
+	$(function() {
 		var tableElement = $("#bookTable");
 
-			$("#btnSearch").click(function () {
-				$.get("search/books/" + $("#iptPieceName").val(), function (data) {
+		$("#btnGradeSearch").click(function() {
 
-					tableElement.find("tr").slice(1).remove();
+			var gradeTableElement = $("#gradeTable");
 
-					$.each(data, function (index, value) {
-						
-						var newRow = "<tr>";
-						
-						newRow += "<td>" + value.title + "</td>";
-						newRow += "<td>" + value.isbn + "</td>";
-						newRow += "<td>" + value.publisher + "</td>";
+			$.get("search/pieces/" + $("#slectedInstrument").val() + "/" + $("#selectedGrade").val(), function (data) {
 
-						newRow += "</tr>";
-						tableElement.append(newRow);
-					});
+				gradeTableElement.find("tr").slice(1).remove();
+
+				$.each(data, function (index, value) {
+
+					var newRow = "<tr>";
+
+					newRow += "<td>" + value.list + "</td>";
+					newRow += "<td>" + value.title + "</td>";
+					newRow += "<td>" + value.grade + "</td>";
+
+					newRow += "</tr>";
+					gradeTableElement.append(newRow);
+				});
+			});
+
+		});
+
+
+		$("#btnSearch").click(function() {
+			$.get("search/books/" + $("#iptPieceName").val(), function(data) {
+
+				tableElement.find("tr").slice(1).remove();
+
+				$.each(data, function(index, value) {
+
+					var newRow = "<tr>";
+
+					newRow += "<td>" + value.title + "</td>";
+					newRow += "<td>" + value.isbn + "</td>";
+					newRow += "<td>" + value.publisher + "</td>";
+
+					newRow += "</tr>";
+					tableElement.append(newRow);
 				});
 			});
 		});
-	</script>
+	});
+</script>
 
 
 

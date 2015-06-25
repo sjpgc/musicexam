@@ -29,10 +29,17 @@ namespace Ductia.Web.Controllers
 
 	    [HttpGet]
 	    [Route("search/pieces/{instrument}/{grade}")]
-	    public IEnumerable<GradePiece> SearchPieces(String intrument, String grade)
+		public IEnumerable<GradePiece> SearchPieces(Instrument instrument, Byte grade)
 	    {
-		    return new List<GradePiece>();
+			return _pieceRepository.SearchPieces(instrument, grade);
 	    }
+
+		[HttpGet]
+		[Route("search/pieces/{instrument}")]
+		public IEnumerable<GradePiece> SearchPieces(Instrument instrument)
+		{
+			return _pieceRepository.SearchPieces(instrument);
+		}
 
     }
 }
