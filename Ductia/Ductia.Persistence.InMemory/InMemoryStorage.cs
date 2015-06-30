@@ -131,5 +131,10 @@ namespace Ductia.Persistence.InMemory
 		{
 			get { return _gradePieces; }
 		}
+
+		public static IEnumerable<Grade> Grades
+		{
+			get { return _grades; }
+		}
 	}
 }

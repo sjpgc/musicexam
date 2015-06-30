@@ -53,6 +53,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ductia.Domain\Ductia.Domain.csproj">
+      <Project>{9F77B5EC-0E4F-4356-8650-38963C669F63}</Project>
+      <Name>Ductia.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ductia.Persistence\Ductia.Persistence.csproj">
       <Project>{47EB0EBE-824E-4FFE-B457-6CA08FEABA4B}</Project>
       <Name>Ductia.Persistence</Name>

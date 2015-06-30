@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using Ductia.Domain;
+using NUnit.Framework;
 
 namespace Ductia.Persistence.Tests
 {
@@ -6,11 +8,36 @@ namespace Ductia.Persistence.Tests
     public abstract class PieceRepositoryTests
 	{
 		protected abstract IPieceRepository PieceRepository { get; }
-
-		[SetUp]
+		
+		[TestFixtureSetUp]
 		protected abstract void Setup();
 
-		[TearDown]
+		[TestFixtureTearDown]
 		protected abstract void TearDown();
+
+		[Test]
+		protected void When_SearchingPieces_Given_AnInstrument_Should_ReturnExpectedResults()
+		{
+			// Act
+
+			var results = PieceRepository.SearchPieces(Instrument.Guitar);
+
+			// Assert
+
+			Assert.AreEqual(results.Count(), 1);
+
+		}
+
+		//[Test]
+		//protected void When_SearchingPieces_Given_AnInstrumentAndAGrade_Should_ReturnExpectedResults()
+		//{
+
+		//}
+
+		//[Test]
+		//protected void When_SearchingPieces_Given_AnInstrumentAndANonExistingGrade_Should_ReturnNoResults()
+		//{
+
+		//}
 	}
 }
