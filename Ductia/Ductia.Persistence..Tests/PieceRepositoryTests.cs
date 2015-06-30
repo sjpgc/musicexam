@@ -15,8 +15,9 @@ namespace Ductia.Persistence.Tests
 		[TestFixtureTearDown]
 		protected abstract void TearDown();
 
+
 		[Test]
-		protected void When_SearchingPieces_Given_AnInstrument_Should_ReturnExpectedResults()
+		public void When_SearchingPieces_Given_AnInstrument_Should_ReturnExpectedResults()
 		{
 			// Act
 
