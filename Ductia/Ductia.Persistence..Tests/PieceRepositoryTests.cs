@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Ductia.Domain;
 using NUnit.Framework;
 
@@ -20,25 +21,31 @@ namespace Ductia.Persistence.Tests
 		public void When_SearchingPieces_Given_AnInstrument_Should_ReturnExpectedResults()
 		{
 			// Act
-
 			var results = PieceRepository.SearchPieces(Instrument.Guitar);
 
 			// Assert
-
-			Assert.AreEqual(results.Count(), 1);
-
+			var gradePieces = results as List<GradePiece> ?? results.ToList();
+			Assert.AreEqual(2, gradePieces.Count());
+			Assert.AreEqual("title1", gradePieces[0].Piece.Title);
+			Assert.AreEqual("title2", gradePieces[1].Piece.Title);
 		}
 
-		//[Test]
-		//protected void When_SearchingPieces_Given_AnInstrumentAndAGrade_Should_ReturnExpectedResults()
-		//{
+		[Test]
+		public void When_SearchingPieces_Given_AnInstrumentAndAGrade_Should_ReturnExpectedResults()
+		{
+			var results = PieceRepository.SearchPieces(Instrument.Guitar, 1);
+			
+			var gradePieces = results as List<GradePiece> ?? results.ToList();
+			Assert.AreEqual(1, gradePieces.Count());
+			Assert.AreEqual("title1", gradePieces[0].Piece.Title);
+		}
 
-		//}
-
-		//[Test]
-		//protected void When_SearchingPieces_Given_AnInstrumentAndANonExistingGrade_Should_ReturnNoResults()
-		//{
-
-		//}
+		[Test]
+		public void When_SearchingPieces_Given_AnInstrumentAndANonExistingGrade_Should_ReturnNoResults()
+		{
+			var results = PieceRepository.SearchPieces(Instrument.Guitar, 255);
+			
+			Assert.AreEqual(0, results.Count());
+		}
 	}
 }

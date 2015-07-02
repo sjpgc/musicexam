@@ -120,8 +120,7 @@ namespace Ductia.Persistence.InMemory
 				}
 			};
 		}
-
-
+		
 		public static IEnumerable<Book> Books
 		{
 			get { return _books; }
@@ -132,9 +131,14 @@ namespace Ductia.Persistence.InMemory
 			get { return _gradePieces; }
 		}
 
-		public static IEnumerable<Grade> Grades
+		public static IList<Grade> Grades
 		{
 			get { return _grades; }
 		}
+		
+		//public static void AddGrade(Grade grade)
+		//{
+			
+		//}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ductia.Domain;
 
 namespace Ductia.Persistence.InMemory
@@ -8,12 +9,16 @@ namespace Ductia.Persistence.InMemory
 	{
 		public IEnumerable<GradePiece> SearchPieces(Instrument instrument, Byte grade)
 		{
-			throw new NotImplementedException();
+			var gradesForInstrument = InMemoryStorage.Grades.Where(p => p.Instrument == instrument && p.Level == grade).SelectMany(g => g.Pieces);
+
+			return gradesForInstrument;
 		}
 
 		public IEnumerable<GradePiece> SearchPieces(Instrument instrument)
 		{
-			throw new NotImplementedException();
+			var gradesForInstrument = InMemoryStorage.Grades.Where(p => p.Instrument == instrument).SelectMany(g => g.Pieces);
+			
+			return gradesForInstrument;
 		}
 	}
 }
