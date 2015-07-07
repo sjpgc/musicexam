@@ -233,6 +233,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularUI\ductia.js" />
+    <Content Include="AngularUI\index.html" />
+    <Content Include="AngularUI\main.css" />
+    <Content Include="AngularUI\table.css" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap.css" />

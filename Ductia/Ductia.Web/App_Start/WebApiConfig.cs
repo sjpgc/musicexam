@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+
 
 namespace Ductia.Web
 {
@@ -12,6 +15,8 @@ namespace Ductia.Web
 	{
 		public static void Register(HttpConfiguration config)
 		{
+			config.EnableCors();
+
 			// Web API configuration and services
 			// Configure Web API to use only bearer token authentication.
 			config.SuppressDefaultHostAuthentication();
@@ -19,7 +24,7 @@ namespace Ductia.Web
 
 			// Use camel case for JSON data.
 			config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
+			
 			// Web API routes
 			config.MapHttpAttributeRoutes();
 
@@ -28,6 +33,8 @@ namespace Ductia.Web
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+
+			
 		}
 	}
 }

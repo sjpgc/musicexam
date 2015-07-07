@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Persistence.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Persistence.InMemory.Tests", "Ductia.Persistence.InMemory.Tests\Ductia.Persistence.InMemory.Tests.csproj", "{6EF81A3F-E14A-4A62-AB5C-F5D43126F36B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ductia.Web.Angular", "Ductia.Web.Angular\Ductia.Web.Angular.csproj", "{CBB17745-E373-4C8D-80E5-D37CF8CFDDF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{6EF81A3F-E14A-4A62-AB5C-F5D43126F36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF81A3F-E14A-4A62-AB5C-F5D43126F36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF81A3F-E14A-4A62-AB5C-F5D43126F36B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB17745-E373-4C8D-80E5-D37CF8CFDDF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB17745-E373-4C8D-80E5-D37CF8CFDDF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB17745-E373-4C8D-80E5-D37CF8CFDDF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB17745-E373-4C8D-80E5-D37CF8CFDDF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

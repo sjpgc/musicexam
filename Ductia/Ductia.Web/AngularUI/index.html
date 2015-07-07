@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Ductia</title>
+
+	<link rel="stylesheet" type="text/css" href="main.css" />
+	<link rel="stylesheet" type="text/css" href="table.css" />
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+	<script src="ductia.js"></script>
+
+</head>
+<body ng-app="ductia" ng-controller="SearchController as search">
+<div>
+	<input ng-model="name"/><button ng-click="searchByName(name)">Search</button>
+</div>
+
+<!--<div>
+	{{searchResult}}
+</div>-->
+
+<div class="CSS_Table_Example" style="width:600px;height:150px;">
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>ISBN</th>
+				<th>Publisher</th>
+				<th>Pieces</th>
+			</tr>
+			<tr ng-repeat="res in searchResult">
+				<td>{{res.title}}</td>
+				<td>{{res.isbn}}</td>
+				<td>{{res.publisher}}</td>
+				<td>
+					<div ng-repeat="piece in res.pieces">
+						<span>{{piece.title}}</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
