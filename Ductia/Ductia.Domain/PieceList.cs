@@ -1,4 +1,7 @@
-﻿namespace Ductia.Domain
+﻿using System.ComponentModel;
+using System.Runtime.Serialization;
+
+namespace Ductia.Domain
 {
 	public enum PieceList
 	{

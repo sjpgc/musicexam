@@ -5,7 +5,7 @@ namespace Ductia.Persistence
 {
 	public interface IPieceRepository
 	{
-		IEnumerable<GradePiece> SearchPieces(Instrument instrument, byte grade);
-		IEnumerable<GradePiece> SearchPieces(Instrument instrument);
+		IEnumerable<Grade> SearchPieces(Instrument instrument, byte grade);
+		IEnumerable<Grade> SearchPieces(Instrument instrument);
 	}
 }

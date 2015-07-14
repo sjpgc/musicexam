@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Ductia.Domain;
 using Ductia.Persistence;
@@ -29,17 +30,41 @@ namespace Ductia.Web.Controllers
 
 	    [HttpGet]
 	    [Route("search/pieces/{instrument}/{grade}")]
-		public IEnumerable<GradePiece> SearchPieces(Instrument instrument, Byte grade)
+		public IEnumerable<SearchPiecesDTO> SearchPieces(Instrument instrument, Byte grade)
 	    {
-			return _pieceRepository.SearchPieces(instrument, grade);
+		    var results = 
+				from result in _pieceRepository.SearchPieces(instrument, grade)
+				//let rGrade = result.Level
+				from piece in result.Pieces
+				select new SearchPiecesDTO
+			    {
+					List = piece.List.ToString(),
+					Title = piece.Piece.Title,
+					Grade = grade
+			    };
+			return results;
 	    }
 
 		[HttpGet]
 		[Route("search/pieces/{instrument}")]
-		public IEnumerable<GradePiece> SearchPieces(Instrument instrument)
+		public IEnumerable<SearchPiecesDTO> SearchPieces(Instrument instrument)
 		{
-			return _pieceRepository.SearchPieces(instrument);
+			var results =
+				from result in _pieceRepository.SearchPieces(instrument)
+				let rGrade = result.Level
+				from piece in result.Pieces
+				select new SearchPiecesDTO
+				{
+					List = piece.List.ToString(),
+					Title = piece.Piece.Title,
+					Grade = rGrade
+				};
+			return results;
 		}
 
     }
+}
+
+namespace Ductia.Web.Code
+{
 }

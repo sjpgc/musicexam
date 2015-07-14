@@ -2,136 +2,169 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Ductia - Home</title>
+
+	<link rel="stylesheet" href="Content/jquery-ui.css" />
+	<link rel="stylesheet" href="Content/Site.css" />
 	<script src="Scripts/jquery-1.10.2.js"></script>
+	<script src="Scripts/jquery-ui.min.js"></script>
+	<style>
+		#selectedGrades .ui-selecting {
+			background: #FECA40;
+		}
+
+		#selectedGrades .ui-selected {
+			background: #F39814;
+			color: white;
+		}
+
+		#selectedGrades {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 225px;
+		}
+
+			#selectedGrades li {
+				margin: 3px;
+				padding: 1px;
+				float: left;
+				width: 50px;
+				height: 40px;
+				font-size: 2em;
+				text-align: center;
+			}
+	</style>
 </head>
 <body>
-<div id="searchByPieceNameDiv">
-	<input type="text" id="iptPieceName"/>
-	<input type="button" id="btnSearch" value="Search" />
-	<table id="bookTable">
-		<tr>
-			<th>Title</th>
-			<th>ISBN</th>
-			<th>Publisher</th>
-		</tr>
-	</table>
 
-</div>
+	<div id="pageWrapper">
 
 
+		<div id="searchByPieceNameDiv">
+			<input type="text" id="iptPieceName" />
+			<input type="button" id="btnSearch" value="Search" />
+			<table id="bookTable">
+				<tr>
+					<th>Title</th>
+					<th>ISBN</th>
+					<th>Publisher</th>
+				</tr>
+			</table>
 
-<div id="searchByGradeDiv">
-	<select id="slectedInstrument">
-		<option value="">
-			Choose an Instrument
-		</option>
-		<option value="Flute">
-			Flute
-		</option>
-		<option value="DescantRecorder">
-			Descant Recorder
-		</option>
-		<option value="AltoRecorder">
-			Alto Recorder
-		</option>
-		<option value="Guitar">
-			Guitar
-		</option>
-	</select>
-	<select id="selectedGrade">
-		<option value="-1">
-			Choose a Grade
-		</option>
-		<option value="1">
-			Grade 1
-		</option>
-		<option value="2">
-			Grade 2
-		</option>
-		<option value="3">
-			Grade 3
-		</option>
-		<option value="4">
-			Grade 4
-		</option>
-		<option value="5">
-			Grade 5
-		</option>
-		<option value="6">
-			Grade 6
-		</option>
-		<option value="7">
-			Grade 7
-		</option>
-		<option value="8">
-			Grade 8
-		</option>
-	</select>
-	<input type="button" id="btnGradeSearch" value="Search" />
-	<table id="gradeTable">
-		<tr>
-			<th>List</th>
-			<th>Title</th>
-			<th>Grade</th>
-		</tr>
-	</table>
-</div>
+		</div>
+		
+		<div id="searchByGradeDiv">
+			
+			<div id="selectedGradesContainer">
+
+				<select id="slectedInstrument">
+					<option value="">
+						Choose an Instrument
+					</option>
+					<option value="Flute">
+						Flute
+					</option>
+					<option value="DescantRecorder">
+						Descant Recorder
+					</option>
+					<option value="AltoRecorder">
+						Alto Recorder
+					</option>
+					<option value="Guitar">
+						Guitar
+					</option>
+				</select>
+
+				<ol id="selectedGrades">
+					<li class="ui-state-default">1</li>
+					<li class="ui-state-default">2</li>
+					<li class="ui-state-default">3</li>
+					<li class="ui-state-default">4</li>
+					<li class="ui-state-default">5</li>
+					<li class="ui-state-default">6</li>
+					<li class="ui-state-default">7</li>
+					<li class="ui-state-default">8</li>
+				</ol>
+			</div>
+
+			<div id="gradeSearchButtonContainer">
+				<input type="button" id="btnGradeSearch" value="Search" />
+			</div>
+
+
+			<table id="gradeTable">
+				<tr>
+					<th>List</th>
+					<th>Title</th>
+					<th>Grade</th>
+				</tr>
+			</table>
+		</div>
+
+
+	</div>
 
 
 
 
 
+		<script>
+			$(function () {
+				var tableElement = $("#bookTable");
+
+				$("#btnGradeSearch").click(function () {
+
+					var gradeTableElement = $("#gradeTable");
+					var selectedGrade = parseInt($("#selectedGrade").val());
+					var searchURL = "search/pieces/" + $("#slectedInstrument").val();
+					if (selectedGrade > 0) {
+						searchURL += "/" + selectedGrade;
+					}
 
 
+					$.get(searchURL, function (data) {
 
-<script>
-	$(function() {
-		var tableElement = $("#bookTable");
+						gradeTableElement.find("tr").slice(1).remove();
 
-		$("#btnGradeSearch").click(function() {
+						$.each(data, function (index, value) {
 
-			var gradeTableElement = $("#gradeTable");
+							var newRow = "<tr>";
 
-			$.get("search/pieces/" + $("#slectedInstrument").val() + "/" + $("#selectedGrade").val(), function (data) {
+							newRow += "<td>" + value.list + "</td>";
+							newRow += "<td>" + value.title + "</td>";
+							newRow += "<td>" + value.grade + "</td>";
 
-				gradeTableElement.find("tr").slice(1).remove();
+							newRow += "</tr>";
+							gradeTableElement.append(newRow);
+						});
+					});
 
-				$.each(data, function (index, value) {
-
-					var newRow = "<tr>";
-
-					newRow += "<td>" + value.list + "</td>";
-					newRow += "<td>" + value.title + "</td>";
-					newRow += "<td>" + value.grade + "</td>";
-
-					newRow += "</tr>";
-					gradeTableElement.append(newRow);
 				});
-			});
-
-		});
 
 
-		$("#btnSearch").click(function() {
-			$.get("search/books/" + $("#iptPieceName").val(), function(data) {
+				$("#btnSearch").click(function () {
 
-				tableElement.find("tr").slice(1).remove();
+					$.get("search/books/" + $("#iptPieceName").val(), function (data) {
 
-				$.each(data, function(index, value) {
+						tableElement.find("tr").slice(1).remove();
 
-					var newRow = "<tr>";
+						$.each(data, function (index, value) {
 
-					newRow += "<td>" + value.title + "</td>";
-					newRow += "<td>" + value.isbn + "</td>";
-					newRow += "<td>" + value.publisher + "</td>";
+							var newRow = "<tr>";
 
-					newRow += "</tr>";
-					tableElement.append(newRow);
+							newRow += "<td>" + value.title + "</td>";
+							newRow += "<td>" + value.isbn + "</td>";
+							newRow += "<td>" + value.publisher + "</td>";
+
+							newRow += "</tr>";
+							tableElement.append(newRow);
+						});
+					});
 				});
+
+				$("#selectedGrades").selectable();
 			});
-		});
-	});
-</script>
+		</script>
 
 
 

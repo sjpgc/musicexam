@@ -35,7 +35,7 @@ namespace Ductia.Persistence.Tests
 		{
 			var results = PieceRepository.SearchPieces(Instrument.Guitar, 1);
 			
-			var gradePieces = results as List<GradePiece> ?? results.ToList();
+			var gradePieces = results as List<Grade> ?? results.ToList();
 			Assert.AreEqual(1, gradePieces.Count());
 			Assert.AreEqual("title1", gradePieces[0].Piece.Title);
 		}

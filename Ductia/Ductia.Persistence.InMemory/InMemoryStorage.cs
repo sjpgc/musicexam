@@ -78,7 +78,30 @@ namespace Ductia.Persistence.InMemory
 						new GradePiece()
 						{
 							List = PieceList.A,
-							Piece = _pieces["Water Music"]
+							Piece = _pieces["The Music for the Royal Fireworks"]
+						},
+						new GradePiece()
+						{
+							List = PieceList.B,
+							Piece = _pieces["Nimrod"]
+						},
+						new GradePiece()
+						{
+							List = PieceList.C,
+							Piece = _pieces["The Playful Pony"]
+						}
+					}
+				},
+				new Grade()
+				{
+					Level = 2,
+					Instrument = Instrument.Flute,
+					Pieces = new List<GradePiece>
+					{
+						new GradePiece()
+						{
+							List = PieceList.A,
+							Piece = _pieces["Il Barbiere di Siviglia"]
 						},
 						new GradePiece()
 						{
@@ -88,17 +111,7 @@ namespace Ductia.Persistence.InMemory
 						new GradePiece()
 						{
 							List = PieceList.B,
-							Piece = _pieces["Mikado"]
-						},
-						new GradePiece()
-						{
-							List = PieceList.B,
 							Piece = _pieces["Nimrod"]
-						},
-						new GradePiece()
-						{
-							List = PieceList.B,
-							Piece = _pieces["The Planets"]
 						},
 						new GradePiece()
 						{
@@ -108,14 +121,8 @@ namespace Ductia.Persistence.InMemory
 						new GradePiece()
 						{
 							List = PieceList.C,
-							Piece = _pieces["The Playful Pony"]
-						},
-						new GradePiece()
-						{
-							List = PieceList.C,
 							Piece = _pieces["Mango Tango"]
 						}
-
 					}
 				}
 			};
