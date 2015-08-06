@@ -22,5 +22,29 @@ namespace Ductia.Persistence.InMemory
 			
 			return gradesForInstrument;
 		}
+
+		public IEnumerable<Book> SearchBooks(Instrument instrument, IEnumerable<byte> grades)
+		{
+			var result =
+				from g in grades.Distinct()
+				from grade in InMemoryStorage.Grades.Where(gr => gr.Instrument == instrument && gr.Level == g)
+				from piece in grade.Pieces
+				select piece;
+				
+			var a = result.SelectMany(piece => piece.Piece.Books);
+
+			return a;
+		}
+
+
+		public IEnumerable<Grade> SearchPieces(Instrument instrument, IEnumerable<byte> grades)
+		{
+			var gradesForInstrument =
+				from g in grades.Distinct()
+				from grade in InMemoryStorage.Grades
+				.Where (p => p.Instrument == instrument && p.Level == g)
+				select grade;
+			return gradesForInstrument;
+		}
 	}
 }

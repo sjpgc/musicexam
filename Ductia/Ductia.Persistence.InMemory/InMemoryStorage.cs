@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Runtime.CompilerServices;
 using Ductia.Domain;
 
 namespace Ductia.Persistence.InMemory
@@ -28,40 +26,38 @@ namespace Ductia.Persistence.InMemory
 				new Piece {Title = "Mango Tango"},
 			};
 
+			var book1 = new Book
+			{
+				Id = Guid.NewGuid(),
+				Title = "Some title",
+				Publisher = "Acme ltd.",
+				Isbn = "47859375"
+			}
+				.AddPiece(_pieces["Il Barbiere di Siviglia"])
+				.AddPiece(_pieces["Water Music"])
+				.AddPiece(_pieces["The Music for the Royal Fireworks"])
+				.AddPiece(_pieces["Mikado"])
+				.AddPiece(_pieces["Nimrod"]);
+
+			var book2 = new Book
+			{
+				Id = Guid.NewGuid(),
+				Title = "Some other title",
+				Publisher = "Pub ltd",
+				Isbn = "485347895",
+
+			}
+				.AddPiece(_pieces["The Planets"])
+				.AddPiece(_pieces["Some Water Music"])
+				.AddPiece(_pieces["The Playful Pony"])
+				.AddPiece(_pieces["Mango Tango"]);
+			
 			_books = new List<Book>
 			{
-				new Book
-				{
-					Id = Guid.NewGuid(),
-					Title = "Some title",
-					Publisher = "Acme ltd.",
-					Isbn = "47859375",
-					Pieces = new List<Piece>
-					{
-						_pieces["Il Barbiere di Siviglia"],
-						_pieces["Water Music"],
-						_pieces["The Music for the Royal Fireworks"],
-						_pieces["Mikado"],
-						_pieces["Nimrod"]
-					}
-				},
-				new Book
-				{
-					Id = Guid.NewGuid(),
-					Title = "Some other title",
-					Publisher = "Pub ltd",
-					Isbn = "485347895",
-					Pieces = new List<Piece>
-					{
-						_pieces["The Planets"],
-						_pieces["Some Water Music"],
-						_pieces["The Playful Pony"],
-						_pieces["Mango Tango"]
-					}
-				},
+				book1,
+				book2
 			};
-
-
+			
 			_grades = new List<Grade>
 			{
 				new Grade()

@@ -20,12 +20,14 @@ namespace Ductia.Web.Controllers
 
 	    [HttpGet]
 		[Route("search/books/{pieceName}")]
-	    public IEnumerable<Book> SearchBooks(string pieceName)
+	    public IEnumerable<object> SearchBooks(string pieceName)
 		{
 			if (pieceName == null) return new List<Book>();
 			if (string.IsNullOrWhiteSpace(pieceName)) return new List<Book>();
 			
-			return _bookRepository.SearchInPieces(pieceName);
+			var books = _bookRepository.SearchInPieces(pieceName).Select(bk => new {title = bk.Title, isbn = bk.Isbn, publisher = bk.Publisher});
+			
+		    return books;
 		}
 
 	    [HttpGet]
@@ -45,6 +47,23 @@ namespace Ductia.Web.Controllers
 			return results;
 	    }
 
+		[HttpPost]
+		[Route("search/pieces")]
+		public IEnumerable<SearchPiecesDTO> SearchPieces([FromBody] GradeRequest request)
+		{
+			var results =
+				from result in _pieceRepository.SearchPieces(request.Instrument, request.SelectedGrades)
+				let rGrade = result.Level
+				from piece in result.Pieces
+				select new SearchPiecesDTO
+				{
+					List = piece.List.ToString(),
+					Title = piece.Piece.Title,
+					Grade = rGrade
+				};
+			return results;
+		}
+
 		[HttpGet]
 		[Route("search/pieces/{instrument}")]
 		public IEnumerable<SearchPiecesDTO> SearchPieces(Instrument instrument)
@@ -62,9 +81,30 @@ namespace Ductia.Web.Controllers
 			return results;
 		}
 
-    }
-}
+		//[HttpPost]
+		//[Route("search/pieces")]
+		//public IEnumerable<SearchPiecesDTO> SearchPieces([FromBody] GradeRequest selectedGrades)
+		//{
+		//	var resultG = from result in _pieceRepository.SearchPieces(selectedGrades.Instrument, selectedGrades.SelectedGrades)
+		//		   let rGrade = result.Level
+		//		   from piece in result.Pieces
+		//		   select new SearchPiecesDTO
+		//		   {
+		//			   List = piece.List.ToString(),
+		//			   Title = piece.Piece.Title,
+		//			   Grade = rGrade
+		//		   };
 
-namespace Ductia.Web.Code
-{
+		//	return resultG;
+		//}
+
+	    [HttpPost]
+	    [Route("search/books")]
+	    public IEnumerable<Book> SearchBooks([FromBody] GradeRequest bookRequest )
+	    {
+			var results = _pieceRepository.SearchBooks(bookRequest.Instrument, bookRequest.SelectedGrades);
+		    return results;
+	    }
+
+    }
 }

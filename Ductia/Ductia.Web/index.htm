@@ -112,35 +112,59 @@
 			$(function () {
 				var tableElement = $("#bookTable");
 
-				$("#btnGradeSearch").click(function () {
+				$("#btnGradeSearch").click(function() {
 
 					var gradeTableElement = $("#gradeTable");
-					var selectedGrade = parseInt($("#selectedGrade").val());
-					var searchURL = "search/pieces/" + $("#slectedInstrument").val();
-					if (selectedGrade > 0) {
-						searchURL += "/" + selectedGrade;
-					}
+					//var selectedGrade = parseInt($("#selectedGrade").val());
+					var selectedListElements = $("#selectedGrades .ui-selected");
+					var selectedInstrument = $("#slectedInstrument").val();
+					//var searchURL = "search/pieces/" + $("#slectedInstrument").val();
+					var searchURL = "search/pieces";
+
+					if (selectedListElements.length > 0) {
 
 
-					$.get(searchURL, function (data) {
-
-						gradeTableElement.find("tr").slice(1).remove();
-
-						$.each(data, function (index, value) {
-
-							var newRow = "<tr>";
-
-							newRow += "<td>" + value.list + "</td>";
-							newRow += "<td>" + value.title + "</td>";
-							newRow += "<td>" + value.grade + "</td>";
-
-							newRow += "</tr>";
-							gradeTableElement.append(newRow);
+						var selectedGrades = new Array();
+						selectedListElements.each(function(index, element) {
+							selectedGrades.push(parseInt($(element).text()));
 						});
-					});
 
+						$.ajax({
+							url: searchURL,
+							cache: false,
+							data: JSON.stringify({ "Instrument": selectedInstrument, "selectedGrades": selectedGrades }),
+							method: "POST",
+							contentType: "application/json; charset=utf-8",
+							success: function(data, status, jqXhr) {
+								processGradeSearchData(gradeTableElement, data);
+							}
+						});
+					} else {
+						$.get(searchURL, function(data) {
+							processGradeSearchData(gradeTableElement, data);
+						});
+					}
 				});
 
+
+
+
+
+				function processGradeSearchData(table, data) {
+					table.find("tr").slice(1).remove();
+
+					$.each(data, function (index, value) {
+
+						var newRow = "<tr>";
+
+						newRow += "<td>" + value.list + "</td>";
+						newRow += "<td>" + value.title + "</td>";
+						newRow += "<td>" + value.grade + "</td>";
+
+						newRow += "</tr>";
+						table.append(newRow);
+					});
+				}
 
 				$("#btnSearch").click(function () {
 
@@ -161,8 +185,11 @@
 						});
 					});
 				});
+				
+				$("#selectedGrades").bind("mousedown", function(e) {
+					e.metaKey = true;
+				}).selectable();
 
-				$("#selectedGrades").selectable();
 			});
 		</script>
 
