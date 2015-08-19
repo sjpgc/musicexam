@@ -3,14 +3,15 @@
 	margin: auto;
 }
 
-#searchByPieceNameDiv, #searchByGradeDiv, #selectedGradesContainer {
+#searchByPieceNameDiv, #searchByGradeDiv, #selectedGradesContainer, #searchByBoardInstrumentGrades  {
 	float: left;
+	margin-right: 20px;
 }
 
 #searchByPieceNameDiv {
 	margin-right: 20px;
 }
 
-#gradeSearchButtonContainer {
+.gradeSearchButtonContainer {
 	clear: both;
 }

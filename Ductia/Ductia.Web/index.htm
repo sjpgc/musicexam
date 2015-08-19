@@ -8,31 +8,32 @@
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery-ui.min.js"></script>
 	<style>
-		#selectedGrades .ui-selecting {
+		.selectedGrades .ui-selecting {
 			background: #FECA40;
 		}
 
-		#selectedGrades .ui-selected {
+		.selectedGrades .ui-selected {
 			background: #F39814;
 			color: white;
 		}
 
-		#selectedGrades {
+		.selectedGrades {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
 			width: 225px;
 		}
+		
+		.selectedGrades li {
+			margin: 3px;
+			padding: 1px;
+			float: left;
+			width: 50px;
+			height: 40px;
+			font-size: 2em;
+			text-align: center;
+		}
 
-			#selectedGrades li {
-				margin: 3px;
-				padding: 1px;
-				float: left;
-				width: 50px;
-				height: 40px;
-				font-size: 2em;
-				text-align: center;
-			}
 	</style>
 </head>
 <body>
@@ -52,12 +53,12 @@
 			</table>
 
 		</div>
-		
-		<div id="searchByGradeDiv">
-			
-			<div id="selectedGradesContainer">
 
-				<select id="slectedInstrument">
+		<div id="searchByGradeDiv">
+
+			<div class="selectedGradesContainer">
+
+				<select class="slectedInstrument">
 					<option value="">
 						Choose an Instrument
 					</option>
@@ -75,7 +76,7 @@
 					</option>
 				</select>
 
-				<ol id="selectedGrades">
+				<ol class="selectedGrades">
 					<li class="ui-state-default">1</li>
 					<li class="ui-state-default">2</li>
 					<li class="ui-state-default">3</li>
@@ -87,12 +88,12 @@
 				</ol>
 			</div>
 
-			<div id="gradeSearchButtonContainer">
+			<div class="gradeSearchButtonContainer">
 				<input type="button" id="btnGradeSearch" value="Search" />
 			</div>
 
 
-			<table id="gradeTable">
+			<table class="gradeTable">
 				<tr>
 					<th>List</th>
 					<th>Title</th>
@@ -101,97 +102,195 @@
 			</table>
 		</div>
 
+		<div id="searchByBoardInstrumentGrades">
+			<div class="selectedGradesContainer">
 
+				<select class="selectedBoard">
+					<option value="">
+						All
+					</option>
+					<option value="ABRSM">
+						ABRSM
+					</option>
+					<option value="Trinity">
+						Trinity
+					</option>
+				</select>
+
+				<select class="slectedInstrument">
+					<option value="">
+						Choose an Instrument
+					</option>
+					<option value="Flute">
+						Flute
+					</option>
+					<option value="DescantRecorder">
+						Descant Recorder
+					</option>
+					<option value="AltoRecorder">
+						Alto Recorder
+					</option>
+					<option value="Guitar">
+						Guitar
+					</option>
+				</select>
+
+				<ol class="selectedGrades">
+					<li class="ui-state-default">1</li>
+					<li class="ui-state-default">2</li>
+					<li class="ui-state-default">3</li>
+					<li class="ui-state-default">4</li>
+					<li class="ui-state-default">5</li>
+					<li class="ui-state-default">6</li>
+					<li class="ui-state-default">7</li>
+					<li class="ui-state-default">8</li>
+				</ol>
+			</div>
+
+			<div class="gradeSearchButtonContainer">
+				<input type="button" id="btnBoardSearch" value="Search" />
+			</div>
+
+
+			<table class="gradeTable">
+				<tr>
+					<th>Title</th>
+					<th>ISBN</th>
+					<th>Publisher</th>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 
 
 
 
-		<script>
-			$(function () {
-				var tableElement = $("#bookTable");
 
-				$("#btnGradeSearch").click(function() {
+<script>
+	
+	function processBooksSearchData(table, data) {
+		table.find("tr").slice(1).remove();
 
-					var gradeTableElement = $("#gradeTable");
-					//var selectedGrade = parseInt($("#selectedGrade").val());
-					var selectedListElements = $("#selectedGrades .ui-selected");
-					var selectedInstrument = $("#slectedInstrument").val();
-					//var searchURL = "search/pieces/" + $("#slectedInstrument").val();
-					var searchURL = "search/pieces";
+		$.each(data, function (index, value) {
 
-					if (selectedListElements.length > 0) {
+			var newRow = "<tr>";
 
+			newRow += "<td>" + value.title + "</td>";
+			newRow += "<td>" + value.isbn + "</td>";
+			newRow += "<td>" + value.publisher + "</td>";
 
-						var selectedGrades = new Array();
-						selectedListElements.each(function(index, element) {
-							selectedGrades.push(parseInt($(element).text()));
-						});
+			newRow += "</tr>";
+			table.append(newRow);
+		});
+	}
+	
+	function processGradeSearchData(table, data) {
+		table.find("tr").slice(1).remove();
 
-						$.ajax({
-							url: searchURL,
-							cache: false,
-							data: JSON.stringify({ "Instrument": selectedInstrument, "selectedGrades": selectedGrades }),
-							method: "POST",
-							contentType: "application/json; charset=utf-8",
-							success: function(data, status, jqXhr) {
-								processGradeSearchData(gradeTableElement, data);
-							}
-						});
-					} else {
-						$.get(searchURL, function(data) {
-							processGradeSearchData(gradeTableElement, data);
-						});
-					}
-				});
+		$.each(data, function (index, value) {
+
+			var newRow = "<tr>";
+
+			newRow += "<td>" + value.list + "</td>";
+			newRow += "<td>" + value.title + "</td>";
+			newRow += "<td>" + value.grade + "</td>";
+
+			newRow += "</tr>";
+			table.append(newRow);
+		});
+	}
 
 
 
+	$(function () {
+		var tableElement = $("#bookTable");
 
+		$("#btnSearch").click(function () {
 
-				function processGradeSearchData(table, data) {
-					table.find("tr").slice(1).remove();
-
-					$.each(data, function (index, value) {
-
-						var newRow = "<tr>";
-
-						newRow += "<td>" + value.list + "</td>";
-						newRow += "<td>" + value.title + "</td>";
-						newRow += "<td>" + value.grade + "</td>";
-
-						newRow += "</tr>";
-						table.append(newRow);
-					});
-				}
-
-				$("#btnSearch").click(function () {
-
-					$.get("search/books/" + $("#iptPieceName").val(), function (data) {
-
-						tableElement.find("tr").slice(1).remove();
-
-						$.each(data, function (index, value) {
-
-							var newRow = "<tr>";
-
-							newRow += "<td>" + value.title + "</td>";
-							newRow += "<td>" + value.isbn + "</td>";
-							newRow += "<td>" + value.publisher + "</td>";
-
-							newRow += "</tr>";
-							tableElement.append(newRow);
-						});
-					});
-				});
-				
-				$("#selectedGrades").bind("mousedown", function(e) {
-					e.metaKey = true;
-				}).selectable();
+			$.get("search/books/" + $("#iptPieceName").val(), function (data) {
+					
+				processBooksSearchData(tableElement, data);
 
 			});
-		</script>
+		});
+
+		$("#btnGradeSearch").click(function () {
+
+			var gradeTableElement = $("#searchByGradeDiv .gradeTable");
+			//var selectedGrade = parseInt($("#selectedGrade").val());
+			var selectedListElements = $("#searchByGradeDiv .selectedGrades .ui-selected");
+			var selectedInstrument = $("#searchByGradeDiv .slectedInstrument").val();
+			//var searchURL = "search/pieces/" + $("#slectedInstrument").val();
+			var searchURL = "search/pieces";
+
+			if (selectedListElements.length > 0) {
+
+
+				var selectedGrades = new Array();
+				selectedListElements.each(function (index, element) {
+					selectedGrades.push(parseInt($(element).text()));
+				});
+
+				$.ajax({
+					url: searchURL,
+					cache: false,
+					data: JSON.stringify({ "Instrument": selectedInstrument, "selectedGrades": selectedGrades }),
+					method: "POST",
+					contentType: "application/json; charset=utf-8",
+					success: function (data, status, jqXhr) {
+						processGradeSearchData(gradeTableElement, data);
+					}
+				});
+			} else {
+				$.get(searchURL, function (data) {
+					processGradeSearchData(gradeTableElement, data);
+				});
+			}
+		});
+			
+		$("#btnBoardSearch").click(function () {
+
+			var gradeTableElement = $("#searchByBoardInstrumentGrades .gradeTable");
+				
+			var selectedBoard = $("#searchByBoardInstrumentGrades .selectedBoard").val();
+			var selectedInstrument = $("#searchByBoardInstrumentGrades .slectedInstrument").val();
+			var selectedListElements = $("#searchByBoardInstrumentGrades .selectedGrades .ui-selected");
+			var searchURL = "search/books";
+
+			if (selectedListElements.length > 0) {
+					
+				var selectedGrades = new Array();
+				selectedListElements.each(function (index, element) {
+					selectedGrades.push(parseInt($(element).text()));
+				});
+
+				$.ajax({
+					url: searchURL,
+					cache: false,
+					data: JSON.stringify({"Board": selectedBoard,  "Instrument": selectedInstrument, "selectedGrades": selectedGrades }),
+					method: "POST",
+					contentType: "application/json; charset=utf-8",
+					success: function (data, status, jqXhr) {
+						
+						processBooksSearchData(gradeTableElement, data);
+					}
+				});
+			} else {
+				$.get(searchURL, function (data) {
+					processBooksSearchData(gradeTableElement, data);
+				});
+			}
+		});
+
+		
+
+		$(".selectedGrades").bind("mousedown", function (e) {
+			e.metaKey = true;
+		}).selectable();
+
+	});
+</script>
 
 
 

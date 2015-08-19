@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Ductia.Domain
 {
-	public class Book : EntityBase
+	public class Book : EntityBase, IEqualityComparer<Book>
 	{
 		public Book()
 		{
@@ -22,6 +22,16 @@ namespace Ductia.Domain
 			((IList<Piece>)Pieces).Add(piece);
 
 			return this;
+		}
+		
+		public bool Equals(Book x, Book y)
+		{
+			return x.Isbn == y.Isbn;
+		}
+
+		public int GetHashCode(Book obj)
+		{
+			return obj.GetHashCode();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using Ductia.Domain;
 
 namespace Ductia.Persistence.InMemory
@@ -10,6 +11,7 @@ namespace Ductia.Persistence.InMemory
 		private static List<Book> _books;
 		private static List<GradePiece> _gradePieces;
 		private static List<Grade> _grades;
+		private static List<ExamBoard> _boards; 
 
 		static InMemoryStorage()
 		{
@@ -122,8 +124,19 @@ namespace Ductia.Persistence.InMemory
 					}
 				}
 			};
+
+			_boards = new BoardCollection()
+			{
+				new ExamBoard {Name = "ABRSM", Grades = new List<Grade>{_grades[0]}},
+				new ExamBoard {Name = "Trinity", Grades = new List<Grade>{_grades[1]} }
+			};
 		}
-		
+
+		public static IEnumerable<ExamBoard> Boards
+		{
+			get { return _boards; }
+		} 
+
 		public static IEnumerable<Book> Books
 		{
 			get { return _books; }
@@ -139,9 +152,5 @@ namespace Ductia.Persistence.InMemory
 			get { return _grades; }
 		}
 		
-		//public static void AddGrade(Grade grade)
-		//{
-			
-		//}
 	}
 }

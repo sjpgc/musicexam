@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardCollection.cs" />
     <Compile Include="BookRepository.cs" />
     <Compile Include="InMemoryStorage.cs" />
     <Compile Include="PieceCollection.cs" />

@@ -7,6 +7,7 @@ namespace Ductia.Persistence
 	{
 		IEnumerable<Grade> SearchPieces(Instrument instrument, byte grade);
 		IEnumerable<Book> SearchBooks(Instrument instrument, IEnumerable<byte> grades);
+		IEnumerable<Book> SearchBooks(string examBoard, Instrument instrument, IEnumerable<byte> grades);
 		IEnumerable<Grade> SearchPieces(Instrument instrument);
 		IEnumerable<Grade> SearchPieces(Instrument instrument, IEnumerable<byte> grades);
 

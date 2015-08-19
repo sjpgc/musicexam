@@ -1,4 +1,4 @@
-﻿var ductia = angular.module("ductia", []);
+﻿var ductia = angular.module("ductia", ['ngAnimate', 'ui.bootstrap']);
 
 ductia.controller("SearchController", ["$scope", "$http",
 	function ($scope, $http) {

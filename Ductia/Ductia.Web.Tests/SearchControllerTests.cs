@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using Ductia.Domain;
 using Ductia.Persistence;
 using Ductia.Web.Controllers;
@@ -77,7 +78,7 @@ namespace searchController
 			byte grade = 1;
 
 			// Act
-			_controller.SearchPieces(instrument, grade);
+			_controller.SearchPieces(new GradeRequest{Instrument = instrument, SelectedGrades = new []{ grade}});
 
 			// Assert
 			_pieceRepositoryMock.Verify(rep => rep.SearchPieces(instrument, grade), Times.Once);
@@ -89,7 +90,7 @@ namespace searchController
 			var instrument = Instrument.Flute;
 
 			// Act
-			_controller.SearchPieces(instrument);
+			_controller.SearchPieces(new GradeRequest{Instrument = instrument});
 
 			// Assert
 			_pieceRepositoryMock.Verify(rep => rep.SearchPieces(instrument), Times.Once);

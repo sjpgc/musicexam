@@ -24,10 +24,10 @@ namespace Ductia.Persistence.Tests
 			var results = PieceRepository.SearchPieces(Instrument.Guitar);
 
 			// Assert
-			var gradePieces = results as List<GradePiece> ?? results.ToList();
-			Assert.AreEqual(2, gradePieces.Count());
-			Assert.AreEqual("title1", gradePieces[0].Piece.Title);
-			Assert.AreEqual("title2", gradePieces[1].Piece.Title);
+			var grades = results as List<Grade> ?? results.ToList();
+			Assert.AreEqual(2, grades.Count());
+			Assert.AreEqual("title1", grades[0].Pieces.First().Piece.Title);
+			Assert.AreEqual("title2", grades[1].Pieces.First().Piece.Title);
 		}
 
 		[Test]
@@ -37,7 +37,7 @@ namespace Ductia.Persistence.Tests
 			
 			var gradePieces = results as List<Grade> ?? results.ToList();
 			Assert.AreEqual(1, gradePieces.Count());
-			Assert.AreEqual("title1", gradePieces[0].Piece.Title);
+			Assert.AreEqual("title1", gradePieces[0].Pieces.First().Piece.Title);
 		}
 
 		[Test]
