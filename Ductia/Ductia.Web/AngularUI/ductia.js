@@ -6,7 +6,10 @@
 		.controller("SearchController", [
 			"$scope", "$http",
 			function($scope, $http) {
-				$scope.grades = [1, 2, 3, 4, 5, 7, 8];
+				$scope.examBoards = ["ABRSM", "Trinity"];
+				$scope.instruments = ["Flute", "Descant Recorder", "Alto Recorder", "Guitar"];
+				$scope.grades = [1, 2, 3, 4, 5, 6, 7, 8];
+
 
 				$scope.searchResult = "";
 
@@ -23,18 +26,17 @@
 						})
 						.error(function(data, status, headers, config) {
 								$scope.searchResult = config;
-
 								alert("error!");
 							}
 						);
 				}
 			}
 		])
-		.directive('grades', function() {
+		.directive('ductiaGrades', function() {
 				return function(scope, el, attrs) {
-						el.bind('mousedown', function(e) {
-							e.metaKey = true;
-						}).selectable();
+					el.bind('mousedown', function (e) {
+						e.metaKey = true;
+					}).selectable();
 				}
 			});
 })();

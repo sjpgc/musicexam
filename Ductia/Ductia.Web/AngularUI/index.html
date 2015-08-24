@@ -11,109 +11,66 @@
 
 	<script src="/Scripts/jquery-1.10.2.js"></script>
 	<script src="/Scripts/jquery-ui.min.js"></script>
-
-
-
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
 	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js"></script>
 	<script src="ductia.js"></script>
 
-	<style>
-		.ui-selectable .ui-selecting {
-			background: #FECA40;
-		}
-
-		.ui-selectable .ui-selected {
-			background: #F39814;
-			color: white;
-		}
-
-		[grades] {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			width: 225px;
-		}
-
-			[grades] li {
-				margin: 3px;
-				padding: 1px;
-				float: left;
-				width: 50px;
-				height: 40px;
-				font-size: 2em;
-				text-align: center;
-			}
-	</style>
-
 </head>
 
 <body ng-app="ductia" ng-controller="SearchController as search">
+	<div id="pageWarpper">
+		<tabset>
+			<tab heading="Piece Search">
+				<input ng-model="name" />
+				<button ng-click="searchByName(name)">Search</button>
+				<div class="CSS_Table_Example" style="width: 600px; height: 150px;">
+					<table>
+						<tr>
+							<th>Title</th>
+							<th>ISBN</th>
+							<th>Publisher</th>
+							<th>Pieces</th>
+						</tr>
+						<tr ng-repeat="res in searchResult">
+							<td>{{res.title}}</td>
+							<td>{{res.isbn}}</td>
+							<td>{{res.publisher}}</td>
+							<td>
+								<div ng-repeat="piece in res.pieces">
+									<span>{{piece.title}}</span>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</tab>
 
+			<tab heading="Book Search">
+				<select class="selectedBoard">
+					<option value="">
+						All
+					</option>
+					<option ng-repeat="board in examBoards" value="{{board}}">
+						{{board}}
+					</option>
+				</select>
 
-	<tabset>
-		<tab heading="Piece Search">
-			<input ng-model="name" />
-			<button ng-click="searchByName(name)">Search</button>
-			<div class="CSS_Table_Example" style="width: 600px; height: 150px;">
-				<table>
-					<tr>
-						<th>Title</th>
-						<th>ISBN</th>
-						<th>Publisher</th>
-						<th>Pieces</th>
-					</tr>
-					<tr ng-repeat="res in searchResult">
-						<td>{{res.title}}</td>
-						<td>{{res.isbn}}</td>
-						<td>{{res.publisher}}</td>
-						<td>
-							<div ng-repeat="piece in res.pieces">
-								<span>{{piece.title}}</span>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</tab>
+				<select class="slectedInstrument">
+					<option value="">
+						Choose an Instrument
+					</option>
+					<option ng-repeat="instrument in instruments" value="{{instrument}}">
+						{{instrument}}
+					</option>
+				</select>
 
-		<tab heading="Book Search">
-			<select class="selectedBoard">
-				<option value="">
-					All
-				</option>
-				<option value="ABRSM">
-					ABRSM
-				</option>
-				<option value="Trinity">
-					Trinity
-				</option>
-			</select>
+				<ol ductia-grades>
+					<li ng-repeat="grade in grades" class="ui-state-default">{{grade}}</li>
+				</ol>
 
-			<select class="slectedInstrument">
-				<option value="">
-					Choose an Instrument
-				</option>
-				<option value="Flute">
-					Flute
-				</option>
-				<option value="DescantRecorder">
-					Descant Recorder
-				</option>
-				<option value="AltoRecorder">
-					Alto Recorder
-				</option>
-				<option value="Guitar">
-					Guitar
-				</option>
-			</select>
-
-			<ol grades>
-				<li ng-repeat="grade in grades" class="ui-state-default">{{grade}}</li>
-			</ol>
-
-		</tab>
-	</tabset>
+			</tab>
+		</tabset>
+	</div>
 </body>
 </html>

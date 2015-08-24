@@ -240,7 +240,6 @@
     <Content Include="AngularUI\main.css" />
     <Content Include="AngularUI\table.css" />
     <Content Include="AngularUI\tabs.html" />
-    <Content Include="AngularUI\templates\grades.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap.css" />
