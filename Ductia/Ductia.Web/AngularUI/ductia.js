@@ -4,9 +4,9 @@
 	angular.module('ductia',
 		['ngAnimate', 'ui.bootstrap'])
 		.factory("searchService", function ($http) {
-			function processResult(response) {
-				return response.data;
-			}
+			//function processResult(response) {
+			//	return response.data;
+			//}
 
 			var searchServiceUrl = "http://localhost:2487/";
 			var restfulSearchBookByPieceTitle = "search/books/{pieceName}";
@@ -16,10 +16,10 @@
 					method: "GET",
 					url: searchServiceUrl + restfulSearchBookByPieceTitle.replace("{pieceName}", name)
 				});
-				return request.then(function(data) {
-					var processedData = processResult(data);
+				return request.then(function(response) {
+					// var processedData = processResult(data);
 					if (typeof callbackSuccess !== "undefined") {
-						callbackSuccess(processedData);
+						callbackSuccess(response.data);
 					}
 				}, function() {
 					if (typeof callbackError !== "undefined") {
@@ -68,11 +68,9 @@
 						},
 						unselected: function(event, ui) {
 							var unselectedValue = $(ui.unselected).text().trim();
-							var newSelection = $.grep(rootScope.selectedGrades, function (value) {
+							rootScope.selectedGrades = $.grep(rootScope.selectedGrades, function (value) {
 								return value.trim() !== unselectedValue;
 							});
-							rootScope.selectedGrades = newSelection;
-
 						}
 					});
 				}
