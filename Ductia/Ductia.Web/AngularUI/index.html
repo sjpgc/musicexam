@@ -47,7 +47,7 @@
 			</tab>
 
 			<tab heading="Book Search">
-				<select class="selectedBoard">
+				<select ng-model="eboard" class=" selectedboard">
 					<option value="">
 						All
 					</option>
@@ -56,7 +56,7 @@
 					</option>
 				</select>
 
-				<select class="slectedInstrument">
+				<select ng-model="instrument" class="slectedInstrument">
 					<option value="">
 						Choose an Instrument
 					</option>
@@ -65,10 +65,11 @@
 					</option>
 				</select>
 
-				<ol ductia-grades>
-					<li ng-repeat="grade in grades" class="ui-state-default">{{grade}}</li>
+				<ol ng-model="selgrades" ductia-grades>
+					<li ng-repeat=" grade in grades" class="ui-state-default">
+					{{grade}}</li>
 				</ol>
-
+				<button ng-click="searchByCriteria(eboard, instrument, selgrades)">Search</button>
 			</tab>
 		</tabset>
 	</div>
