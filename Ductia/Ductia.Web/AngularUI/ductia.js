@@ -50,26 +50,35 @@
 						});
 				};
 				$scope.searchByCriteria = function (eboard, instrument, selgrades) {
-					$scope.selectedGrades = $($scope.selectedGrades).sort();
+					 $scope.selectedGrades = $($scope.selectedGrades).sort();
 					alert(JSON.stringify($scope.selectedGrades));
 				};
 			}
 		])
 		.directive('ductiaGrades', function() {
-				return function(scope, el, attrs) {
+				function link(scope, el, attrs) {
+
+					var rootScope = scope.$parent.$parent;
+
 					el.bind('mousedown', function (e) {
 						e.metaKey = true;
 					}).selectable({
 						selected: function(event, ui) {
-							scope.selectedGrades.push($(ui.selected).text().trim());
+							rootScope.selectedGrades.push($(ui.selected).text().trim());
 						},
 						unselected: function(event, ui) {
 							var unselectedValue = $(ui.unselected).text().trim();
-							scope.selectedGrades = $.grep(scope.selectedGrades, function(value) {
+							var newSelection = $.grep(rootScope.selectedGrades, function (value) {
 								return value.trim() !== unselectedValue;
 							});
+							rootScope.selectedGrades = newSelection;
+
 						}
 					});
 				}
-			});
+
+			return {
+				link: link
+			};
+		});
 })();
